@@ -57,7 +57,7 @@ def callback(packet):
         lastTimeStamp = timestamp
         lastAltitude = altitude
     except:
-        print("Exception occurred: " + message)
+        print("Exception occurred: " + packet)
   
 AIS = aprslib.IS(MyCall, host="rotate.aprs.net", port=14580, skip_login=False)
 AIS.filter = PacketFilter  
