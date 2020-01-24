@@ -7,6 +7,7 @@ import pandas as pd
 import traceback
 
 # Settings
+WatchedCalls = ["KI5GVH-12"]
 MyCall = "KI5GVH"
 gc = pygsheets.authorize(service_file='google.json')
 sh = gc.open('MDM-6-Track')
@@ -14,8 +15,8 @@ wks = sh[0]
 
 lastTimeStamp = 0
 lastAltitude = 0
-PacketFilter = "b/KI5GVH-12"    # http://www.aprs-is.net/javAPRSFilter.aspx
-#PacketFilter = "s/O"  # http://www.aprs-is.net/javAPRSFilter.aspx
+#PacketFilter = "b/KI5GVH-12"    # http://www.aprs-is.net/javAPRSFilter.aspx
+PacketFilter = "s/O"  # http://www.aprs-is.net/javAPRSFilter.aspx
 
 def callback(packet):
     global wks
@@ -53,11 +54,13 @@ def callback(packet):
         #print(timestamp, fromCall, latitude,longitude,altitude,speed,course,comment)
         print (formattedMessage.format(timestamp, fromCall, latitude, longitude, altitude, course, speed, comment)) 
         #print(message)
-        wks.insert_rows(wks.rows, values=[timestamp,fromCall,latitude,longitude,altitude,speed,course,verticalSpeed,comment], inherit=True)
-        lastTimeStamp = timestamp
-        lastAltitude = altitude
+        #if fromCall == 'KI5GVH-11' or fromCall == 'KI5GVH-12' or fromCall=='IR1BY-14':
+        if fromCall in WatchedCalls:
+            wks.insert_rows(wks.rows, values=[timestamp,fromCall,latitude,longitude,altitude,speed,course,verticalSpeed,comment], inherit=True)
+            lastTimeStamp = timestamp
+            lastAltitude = altitude
     except:
-        print("Exception occurred: " + packet)
+        print("Exception occurred: " + str(packet))
   
 AIS = aprslib.IS(MyCall, host="rotate.aprs.net", port=14580, skip_login=False)
 AIS.filter = PacketFilter  
