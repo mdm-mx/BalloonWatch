@@ -23,7 +23,7 @@ def getAprsFeed():
     AIS.consumer(callback, raw=True)
     print("Connected.")
     time.sleep(15)
-    AIS.disconnect()
+    AIS.close()
     #while (True):
     #    time.sleep(1)
 
