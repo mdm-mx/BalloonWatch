@@ -1,10 +1,10 @@
 # BalloonWatch
 
-# pip install aprslib
-# pip install pygsheets
-# pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+1. pip install aprslib
+2. pip install pygsheets
+3. pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 
-# sudo apt-get install python3-pip
-# pip3 install awscli --upgrade --user
-# export PATH=/home/pi/.local/bin:$PATH
+1. sudo apt-get install python3-pip
+2. pip3 install awscli --upgrade --user
+3. export PATH=/home/pi/.local/bin:$PATH
